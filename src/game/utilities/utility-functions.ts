@@ -1,14 +1,19 @@
-export function offscreen(dot) {
-  return (dot.x + dot.radius < 0 || dot.y + dot.radius < 0 ||
+import Dot from '../dot';
+
+export function offscreen(dot: Dot) {
+  return (
+    dot.x + dot.radius < 0 ||
+    dot.y + dot.radius < 0 ||
     dot.x - dot.radius > document.body.clientWidth * 2 ||
-    dot.y - dot.radius > document.body.clientHeight * 2);
+    dot.y - dot.radius > document.body.clientHeight * 2
+  );
 }
 
-export function getCookie(cname) {
+export function getCookie(cname: string) {
   const name = cname + '=';
   const decodedCookie = decodeURIComponent(document.cookie);
   const ca = decodedCookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
+  for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
     while (c.charAt(0) === ' ') {
       c = c.substring(1);

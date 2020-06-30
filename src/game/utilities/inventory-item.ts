@@ -1,11 +1,10 @@
-export default class InventoryItem {
-  constructor(name, quantity) {
-    this.quantity = quantity;
-    this.name = name;
-  }
+import Player from '../player';
 
-  addTo(quantity) {
-    this.quanitity += quantity;
+export default class InventoryItem {
+  constructor(private name: string, private quantity: string) {}
+
+  addTo(quantity: number) {
+    this.quantity += quantity;
   }
 
   getAsItemSchema() {
@@ -13,7 +12,7 @@ export default class InventoryItem {
     return { quantity, name };
   }
 
-  saveToPlayer(player) {
+  saveToPlayer(player: Player) {
     player.inventory.push(this.getAsItemSchema());
   }
 }

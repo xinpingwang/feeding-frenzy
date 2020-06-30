@@ -1,12 +1,16 @@
 import dataStub from './utilities/stub-data';
 import MenuItem from './utilities/menu-item';
+import Game from './game';
 
 export default class Menu {
-  constructor(parent) {
-    this.parent = parent;
+  menuItems: MenuItem[];
+  menuLabels: string[];
+  font: string;
+
+  constructor(private parent: Game) {
     this.menuItems = [];
-    this.font = "100px Indie Flower, cursive";
-    this.menuLabels = ['Survival','High Scores','Story Mode', `Store`];
+    this.font = '100px Indie Flower, cursive';
+    this.menuLabels = ['Survival', 'High Scores', 'Story Mode', `Store`];
     this.buildMenu();
   }
 
@@ -14,7 +18,13 @@ export default class Menu {
     const { menuLabels, menuItems } = this;
     const { clientWidth } = document.body;
     menuLabels.forEach((item, index) => {
-      const menuItem = new MenuItem(clientWidth / 2, 300 + (200 * index), clientWidth, 200, item)
+      const menuItem = new MenuItem(
+        clientWidth / 2,
+        300 + 200 * index,
+        clientWidth,
+        200,
+        item
+      );
       menuItems.push(menuItem);
     });
 
@@ -22,25 +32,30 @@ export default class Menu {
   }
 
   registerEvents() {
-    document.body.addEventListener("click", (e) => this.handleClick(e));
+    document.body.addEventListener('click', (e) => this.handleClick(e));
   }
 
-  handleClick(e) {
+  handleClick(e: MouseEvent) {
     const { x, y } = e;
     const { menuItems, parent } = this;
-    const item = menuItems.filter(item => item.collide(x * 2, y * 2)).pop();
+    const item = menuItems.filter((item) => item.collide(x * 2, y * 2)).pop();
 
-    if (parent.state !== 'high-scores' && parent.state !== 'main-menu' && parent.state !== 'store') {
+    if (
+      parent.state !== 'high-scores' &&
+      parent.state !== 'main-menu' &&
+      parent.state !== 'store'
+    ) {
       return false;
-    } if (parent.state === 'high-scores') {
-      parent.state = "main-menu"
+    }
+    if (parent.state === 'high-scores') {
+      parent.state = 'main-menu';
     } else if (parent.state === 'store') {
-      parent.state = "main-menu"
+      parent.state = 'main-menu';
     } else if (item && item.text === 'Survival') {
       parent.state = 'start-survival';
-    } else if(item.text === 'Store') {
+    } else if (item.text === 'Store') {
       parent.state = 'store';
-    } else if(item.text === 'High Scores') {
+    } else if (item.text === 'High Scores') {
       if (window.deployment === 'development') {
         parent.state = 'high-scores';
         parent.scores = dataStub;
@@ -53,7 +68,7 @@ export default class Menu {
     }
   }
 
-  drawBackground(ctx) {
+  drawBackground(ctx: CanvasRenderingContext2D) {
     const { clientWidth, clientHeight } = document.body;
     ctx.beginPath();
     ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
@@ -61,18 +76,18 @@ export default class Menu {
     ctx.closePath();
   }
 
-  drawMenuItems(ctx) {
+  drawMenuItems(ctx: CanvasRenderingContext2D) {
     const { menuItems, font } = this;
 
     ctx.beginPath();
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.font = font;
-    menuItems.forEach(item => item.draw(ctx));
+    menuItems.forEach((item) => item.draw(ctx));
     ctx.closePath();
   }
 
-  draw(ctx) {
+  draw(ctx: CanvasRenderingContext2D) {
     this.drawBackground(ctx);
     this.drawMenuItems(ctx);
   }

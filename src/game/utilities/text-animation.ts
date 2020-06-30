@@ -1,19 +1,25 @@
 export default class TextAnimation {
-  constructor(life, x, y, message) {
+  start: number;
+  end: number;
+  destroy: boolean;
+
+  constructor(
+    life: number,
+    private x: number,
+    private y: number,
+    private text: string
+  ) {
     this.start = new Date().getTime();
     this.end = this.start + life;
     this.destroy = false;
-    this.text = message;
-    this.x = x;
-    this.y = y;
   }
 
-  draw(ctx) {
+  draw(ctx: CanvasRenderingContext2D) {
     const { text, x, y, end } = this;
     ctx.beginPath();
     ctx.fillStyle = 'yellow';
-    ctx.font = "30px Arial";
-    ctx.fillText(text , x, y);
+    ctx.font = '30px Arial';
+    ctx.fillText(text, x, y);
     ctx.closePath();
     this.y -= 5;
     if (end < new Date().getTime()) {
