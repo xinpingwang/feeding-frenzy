@@ -22,10 +22,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: 'images', to: 'images' },
-        { from: 'styles.css', to: 'styles.css' },
-      ],
+      patterns: [{ from: 'src/assets', to: 'assets' }],
     }),
     new HtmlWebpackPlugin({
       template: 'index.html',
