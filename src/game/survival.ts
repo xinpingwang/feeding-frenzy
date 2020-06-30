@@ -1,3 +1,5 @@
+import * as $ from 'jquery';
+
 import Dot from './dot';
 import { offscreen } from './utilities/utility-functions';
 import TextAnimation from './utilities/text-animation';

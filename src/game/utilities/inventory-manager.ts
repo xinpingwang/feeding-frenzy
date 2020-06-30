@@ -1,3 +1,5 @@
+import * as $ from 'jquery';
+
 import inventoryStub from './stub-inventory';
 import InventoryItem from './inventory-item';
 import Game from '../game';
