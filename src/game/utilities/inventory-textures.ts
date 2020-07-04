@@ -1,4 +1,12 @@
-export default {
+interface InventoryTexture {
+  path: string;
+  xOffSet: number;
+  yOffSet: number;
+  wOffSet: number;
+  hOffSet: number;
+}
+
+let inventoryTextures: { [key: string]: InventoryTexture } = {
   hydrogen: {
     path: '/assets/images/hydrogen.png',
     xOffSet: 1,
@@ -35,3 +43,5 @@ export default {
     hOffSet: 1,
   },
 };
+
+export default inventoryTextures;

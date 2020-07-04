@@ -1,4 +1,3 @@
-import Dot from './dot';
 import Player from './player';
 import Menu from './menu';
 import InputManager from './utilities/input-manager';
@@ -25,8 +24,15 @@ export default class Game {
   player: Player;
   survival: Survival;
   scores: Score[];
+  stateFunctionMap: { [key: string]: Function } = {
+    'main-menu': this.gameMenu,
+    'start-survival': this.startSurvival,
+    'high-scores': this.renderHighScores,
+    'store': this.renderStore,
+    'survival': this.runSurvival,
+  };
 
-  constructor() {
+  constructor(public mode: string = 'development') {
     this.store = new Store(this);
     this.delta = 0;
     this.lastRender = new Date().getTime();
@@ -97,16 +103,6 @@ export default class Game {
     this.lastRender = currentTime;
   }
 
-  stateFunctionHash() {
-    return {
-      'main-menu': this.gameMenu,
-      'start-survival': this.startSurvival,
-      'high-scores': this.renderHighScores,
-      store: this.renderStore,
-      survival: this.runSurvival,
-    };
-  }
-
   runSurvival() {
     this.survival.play();
   }
@@ -123,7 +119,7 @@ export default class Game {
     }
 
     this.setDelta();
-    this.stateFunctionHash()[this.state].call(this);
+    this.stateFunctionMap[this.state].call(this);
     this.renderPlayerText();
     requestAnimationFrame(this.render.bind(this));
   }

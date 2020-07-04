@@ -58,7 +58,7 @@ export default class Menu {
     } else if (item.text === 'Store') {
       parent.state = 'store';
     } else if (item.text === 'High Scores') {
-      if (window.deployment === 'development') {
+      if (this.parent.mode === 'development') {
         parent.state = 'high-scores';
         parent.scores = dataStub;
       } else {

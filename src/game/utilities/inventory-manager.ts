@@ -6,11 +6,11 @@ import Game from '../game';
 
 export default class InventoryManager {
   coins: number;
-  playerInventory: object[];
+  playerInventory: InventoryItem[];
   game: Game;
 
   constructor(parent: Game) {
-    const isDev = window.deployment === 'development';
+    const isDev = parent.mode === 'development';
     this.game = parent;
     this.playerInventory = isDev ? inventoryStub : [];
     this.coins = 0;
@@ -32,15 +32,17 @@ export default class InventoryManager {
         }
         self.coins = parseInt(data[0].coins);
 
-        self.playerInventory = data[0].playerInventory.map((item) => {
-          const { name, quantity } = item;
-          return { name, quantity: parseInt(quantity) };
-        });
+        self.playerInventory = data[0].playerInventory.map(
+          (item: InventoryItem) => {
+            const { name, quantity } = item;
+            return { name, quantity };
+          }
+        );
       }
     );
   }
 
-  updateItem(item) {
+  updateItem(item: InventoryItem) {
     let { playerInventory } = this;
     this.playerInventory = playerInventory.map((ownedItem) =>
       item.name === ownedItem.name
@@ -53,7 +55,7 @@ export default class InventoryManager {
     this.coins += quantity;
   }
 
-  push(item) {
+  push(item: InventoryItem) {
     const { playerInventory } = this;
     const hasItem =
       playerInventory.filter((ownedItem) => ownedItem.name === item.name)
