@@ -1,4 +1,4 @@
-import playerSkins from './utilities/player-skins';
+import playerSkins from './player-skins';
 
 export default class Player {
   x: number;

@@ -1,5 +1,5 @@
 import Game from './game';
-import inventoryTextures from './utilities/inventory-textures';
+import inventoryTextures from './inventory/inventory-textures';
 
 export default class Store {
   constructor(private game: Game) {}

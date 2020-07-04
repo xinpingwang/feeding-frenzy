@@ -1,8 +1,8 @@
 import * as $ from 'jquery';
 
-import dataStub from './utilities/stub-data';
-import MenuItem from './utilities/menu-item';
-import Game from './game';
+import dataStub from '../utilities/stub-data';
+import MenuItem from './menu-item';
+import Game from '../game';
 
 export default class Menu {
   menuItems: MenuItem[];

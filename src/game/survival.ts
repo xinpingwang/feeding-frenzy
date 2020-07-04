@@ -2,8 +2,8 @@ import * as $ from 'jquery';
 
 import Dot from './dot';
 import { offscreen } from './utilities/utility-functions';
-import TextAnimation from './utilities/text-animation';
-import Player from './player';
+import TextAnimation from './animation/text-animation';
+import Player from './player/player';
 import Game from './game';
 
 export default class Survival {

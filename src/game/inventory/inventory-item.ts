@@ -1,4 +1,4 @@
-import Player from '../player';
+import Player from '../player/player';
 
 export default class InventoryItem {
   constructor(public name: string, public quantity: number) {}

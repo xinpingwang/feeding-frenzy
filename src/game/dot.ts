@@ -1,6 +1,6 @@
 import Colors from './colors';
 import shadeColor2 from './utilities/shade-color';
-import playerSkins from './utilities/player-skins';
+import playerSkins from './player/player-skins';
 
 export default class Dot {
   scale: number;

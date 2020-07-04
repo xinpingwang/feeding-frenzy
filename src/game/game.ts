@@ -1,9 +1,9 @@
-import Player from './player';
-import Menu from './menu';
+import Player from './player/player';
+import Menu from './menu/menu';
 import InputManager from './utilities/input-manager';
 import Survival from './survival';
-import AnimationManager from './utilities/animation-manager';
-import InventoryManager from './utilities/inventory-manager';
+import AnimationManager from './animation/animation-manager';
+import InventoryManager from './inventory/inventory-manager';
 import { getCookie } from './utilities/utility-functions';
 import Store from './store';
 import Score from './utilities/score';
